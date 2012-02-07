@@ -20,6 +20,7 @@ object ACL extends Logger {
 
   def isAllowed(r: Box[Req]): Boolean = r match {
     case Full(Req("user_mgt" :: "login" :: _, _, _)) => true
+    case Full(Req("user_mgt" :: "logout" :: _, _, _)) => true
     case Full(Req("user_mgt" :: "validate_user" :: _, _, _)) => true
     case Full(Req("user_mgt" :: "lost_password" :: _, _, _)) => true
     case Full(Req("user_mgt" :: "reset_password" :: _, _, _)) => true
