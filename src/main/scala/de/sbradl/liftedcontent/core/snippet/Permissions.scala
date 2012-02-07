@@ -59,7 +59,7 @@ class Permissions {
 
     val urlKeys = groupedUrls.keys.toList.sorted
     
-    val alwaysAllowed = List("user_mgt/login", "user_mgt/logout", "user_mgt/validate_user")
+    val alwaysAllowed = List("user_mgt/login", "user_mgt/logout", "user_mgt/validate_user", "user_mgt/lost_password", "user_mgt/reset_password")
 
     "* *" #> <table>
                <thead>
