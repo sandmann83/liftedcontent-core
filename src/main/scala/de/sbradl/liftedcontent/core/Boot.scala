@@ -29,6 +29,9 @@ import de.sbradl.liftedcontent.rte.RichTextEditorModule
 import net.liftweb.common.Empty
 import de.sbradl.liftedcontent.core.lib.MailConfigurator
 import de.sbradl.liftedcontent.util.UtilModule
+import net.liftweb.widgets.logchanger.LogLevelChanger
+import net.liftweb.widgets.logchanger.Log4jLoggingBackend
+import net.liftweb.sitemap.Loc
 
 trait Boot {
 
@@ -42,6 +45,11 @@ trait Boot {
   def boot {
 
     try {
+      LogLevelChanger.init
+      object logLevel extends LogLevelChanger with Log4jLoggingBackend {
+        override def menuLocParams: List[Loc.AnyLocParam] = List(User.testSuperUser)
+      }
+      
       MailConfigurator.init
       registerModules
       initModules
@@ -58,6 +66,7 @@ trait Boot {
 
         Menu.i("CONTACT") / "contact" >> LocGroup("secondary"),
 //        Menu.i("SITEMAP") / "sitemap" >> LocGroup("secondary"),
+        logLevel.menu,
         Menu.i("ERROR") / "error" / "index" submenus (
           Menu.i("BOOT_ERROR") / "error" / "boot")) ::: ModuleManager.menus
 
