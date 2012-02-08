@@ -28,12 +28,13 @@ import de.sbradl.liftedcontent.admin.model.BackendArea
 import de.sbradl.liftedcontent.rte.RichTextEditorModule
 import net.liftweb.common.Empty
 import de.sbradl.liftedcontent.core.lib.MailConfigurator
+import de.sbradl.liftedcontent.util.UtilModule
 
 trait Boot {
 
   val adminModule = new AdminModule
 
-  def modules: List[Module] = List(adminModule, new StartPageModule,
+  def modules: List[Module] = List(adminModule, UtilModule, new StartPageModule,
       new LocaleModule, ExceptionHandler, new ErrorPages, SetupModule, 
       new UserModule, new AjaxModule, new PermissionModule, 
       new PagesModule, new RichTextEditorModule)

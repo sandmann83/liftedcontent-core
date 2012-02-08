@@ -4,7 +4,6 @@ import scala.xml.Text
 import de.sbradl.liftedcontent.admin.model.BackendArea
 import de.sbradl.liftedcontent.pages.model.Page
 import de.sbradl.liftedcontent.pages.model.PageContent
-import de.sbradl.liftedcontent.util.Module
 import net.liftweb.mapper.MappedField.mapToType
 import net.liftweb.mapper.By
 import net.liftweb.sitemap.LocPath.stringToLocPath
@@ -14,6 +13,7 @@ import net.liftweb.sitemap.Menu
 import net.liftweb.util.Helpers.urlDecode
 import de.sbradl.liftedcontent.core.lib.ACL
 import net.liftweb.sitemap.Loc.Test
+import de.sbradl.liftedcontent.util.Module
 
 class PagesModule extends Module {
 

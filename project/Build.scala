@@ -1,7 +1,7 @@
 import sbt._
 import Keys._
     
-object AutoCompleteBuild extends Build {
+object CoreBuild extends Build {
   val liftVersion = "2.4"
 
   override lazy val settings = super.settings ++ Seq(
