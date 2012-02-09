@@ -13,6 +13,10 @@ import net.liftweb.util.Helpers._
 import net.liftweb.util.StringPromotable.booleanToStrPromo
 import net.liftweb.http.js.JE.ElemById
 import net.liftweb.http.js.JsCmds
+import de.sbradl.liftedcontent.rte.snippet.RichTextEditor
+import net.liftweb.util.PassThru
+import scala.xml.NodeSeq
+import net.liftweb.util.ClearNodes
 
 class Page(p: PageContent) {
 
@@ -31,8 +35,11 @@ class Page(p: PageContent) {
 
   def render = {
     val id = nextFuncName
+    
+    val enableEditing = User.superUser_?
 
     "data-lift-id=title *" #> p.title &
+    "data-lift-id=editor" #> (if(enableEditing) PassThru else ClearNodes) &
       "data-lift-id=content [id]" #> id &
       "data-lift-id=content [contenteditable]" #> User.superUser_? &
       "data-lift-id=content [class+]" #> (if (User.superUser_?) {"editable"} else {""}) &

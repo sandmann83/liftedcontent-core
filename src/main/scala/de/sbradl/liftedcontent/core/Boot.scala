@@ -32,6 +32,7 @@ import de.sbradl.liftedcontent.util.UtilModule
 import net.liftweb.widgets.logchanger.LogLevelChanger
 import net.liftweb.widgets.logchanger.Log4jLoggingBackend
 import net.liftweb.sitemap.Loc
+import eu.sbradl.repository.ContentRepository
 
 trait Boot {
 
@@ -40,7 +41,7 @@ trait Boot {
   def modules: List[Module] = List(adminModule, UtilModule, new StartPageModule,
       new LocaleModule, ExceptionHandler, new ErrorPages, SetupModule, 
       new UserModule, new AjaxModule, new PermissionModule, 
-      new PagesModule, new RichTextEditorModule)
+      new PagesModule, new RichTextEditorModule, ContentRepository)
 
   def boot {
 
