@@ -29,9 +29,9 @@ object ExceptionHandler extends Module with Logger {
 
   private def initExceptionHandler = {
     LiftRules.exceptionHandler.prepend(NamedPF("Exception Handler") {
-      case (Props.RunModes.Development, Req(path, "", _), exception) => {
+      case (_, Req(path, "", _), exception) => {
         logAndSetException(exception)
-        RedirectResponse("/error/")
+        RedirectResponse("/error")
       }
     })
   }

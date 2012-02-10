@@ -31,25 +31,3 @@ class StartPage extends LongKeyedMapper[StartPage] with IdPK {
     override def displayName = S ? "START_PAGE"
   }
 }
-
-object MobileStartPage extends MobileStartPage with LongKeyedMetaMapper[MobileStartPage] {
-
-  def insert(url: String) {
-    if (find().isEmpty) {
-      val startPage = MobileStartPage.create
-      startPage.url(url)
-      startPage.save
-    }
-
-  }
-
-}
-
-class MobileStartPage extends LongKeyedMapper[MobileStartPage] with IdPK {
-
-  def getSingleton = MobileStartPage
-
-  object url extends MappedString(this, 128) {
-    override def displayName = S ? "MOBILE_START_PAGE"
-  }
-}

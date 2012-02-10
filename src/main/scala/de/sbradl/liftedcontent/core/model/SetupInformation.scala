@@ -13,13 +13,13 @@ class SetupInformation extends LongKeyedMapper[SetupInformation] with IdPK {
   object title extends MappedString(this, 64) {
     override def displayName = S ? "WEBSITE_TITLE"
     override def validations = List(
-      valMinLen(3, S ?? "NAME_TOO_SHORT") _,
-      valMaxLen(64, S ?? "NAME_TOO_LONG") _)
+      valMinLen(3, S ? "NAME_TOO_SHORT") _,
+      valMaxLen(64, S ? "NAME_TOO_LONG") _)
   }
 
   object subtitle extends MappedString(this, 128) {
     override def displayName = S ? "WEBSITE_SUBTITLE"
     override def validations = List(
-      valMaxLen(128, S ?? "NAME_TOO_LONG") _)
+      valMaxLen(128, S ? "NAME_TOO_LONG") _)
   }
 }

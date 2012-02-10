@@ -27,8 +27,7 @@ object ModuleManager {
     modules foreach (_.init)
   }
   
-  def menus = modules flatMap(_.menus) 
-  def setupMenus = modules filter (_.needsSetup) map (_.setupMenu.get)
+  def menus = modules flatMap(_.menus)
   
   private def addToPackages = modules foreach (m => LiftRules.addToPackages(m.packageToAdd))
 

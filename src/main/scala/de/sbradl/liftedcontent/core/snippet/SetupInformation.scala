@@ -11,6 +11,7 @@ import net.liftweb.http.js.JsCmd
 import de.sbradl.liftedcontent.core.model.{ SetupInformation => SetupInformationModel }
 import net.liftweb.util.ClearNodes
 import net.liftweb.http.S
+import de.sbradl.liftedcontent.util.DatabaseHelpers._
 
 class SetupInformation {
 
@@ -39,8 +40,7 @@ class SetupInformation {
     if(enableEditing) {
       information.title(text)
       
-      information.save
-      S.notice(S ? "SAVED_CHANGES")
+      save(information)
     }
   }
   
@@ -48,8 +48,7 @@ class SetupInformation {
     if(enableEditing) {
       information.subtitle(text)
       
-      information.save
-      S.notice(S ? "SAVED_CHANGES")
+      save(information)
     }
   }
 }

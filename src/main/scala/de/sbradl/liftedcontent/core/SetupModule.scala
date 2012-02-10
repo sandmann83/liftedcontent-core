@@ -11,25 +11,26 @@ import de.sbradl.liftedcontent.core.lib.Database
 import de.sbradl.liftedcontent.admin.model.BackendArea
 import net.liftweb.mapper.By
 import net.liftweb.http.S
+import de.sbradl.liftedcontent.core.model.User
 
 object SetupModule extends Module {
   
   def name = "Setup"
   
-  def isAlreadyInstalled = SetupInformation.count > 0
+  def isAlreadyInstalled = User.count > 0
   
   override def mappers = List(SetupInformation)
   
   override def init {
     LiftRules.dispatch.prepend(NamedPF("Setup Check") {
-      case Req("setup" :: "basic" :: _, "", _) if isAlreadyInstalled =>
+      case Req("setup" :: _, "", _) if isAlreadyInstalled =>
         () => throw new Exception(S ? "LIFTEDCONTENT_ALREADY_INSTALLED")
     })
 
     LiftRules.dispatch.prepend(NamedPF("Setup Check") {
       case Req(location, "", _) if (!isAlreadyInstalled && location.head != "setup"
         && location.head != "error") =>
-        () => Full(RedirectResponse("/setup/basic"))
+        () => Full(RedirectResponse("/setup"))
     })
     
     BackendArea.insert("GENERAL_SETTINGS", "general.png", "general", "GENERAL_SETTINGS_DESCRIPTION")

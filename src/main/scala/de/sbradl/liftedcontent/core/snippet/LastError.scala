@@ -6,16 +6,17 @@ import net.liftweb.http.S
 import scala.xml.NodeSeq
 import net.liftweb.util.Helpers._
 import net.liftweb.util.Props
-
 import de.sbradl.liftedcontent.core.ExceptionHandler
+import net.liftweb.util.ClearNodes
+import scala.xml.Text
+import net.liftweb.util.PassThru
 
 class LastError {
 
-  def show(xhtml: NodeSeq) = {
-    bind("error", xhtml,
-      "title" -> title,
-      "message" -> message,
-      "stacktrace" -> stacktrace)
+  def render = {
+    "data-lift-id=title *" #> title &
+      "data-lift-id=message *" #> message &
+      "data-lift-id=stacktrace *" #> (if (Props.mode == Props.RunModes.Development) Full(stacktrace) else Empty)
   }
 
   private def title = Props.mode match {
@@ -33,14 +34,9 @@ class LastError {
     case _ => ""
   }
 
-  private def stacktrace = Props.mode match {
-    case Props.RunModes.Production => {
-      ""
-    }
-    case _ => ExceptionHandler.lastError.is match {
-      case Full(exception) => exception.getStackTraceString
-      case _ => ""
-    }
+  private def stacktrace = ExceptionHandler.lastError.is match {
+    case Full(exception) => exception.getStackTraceString
+    case _ => ""
   }
 
 }
