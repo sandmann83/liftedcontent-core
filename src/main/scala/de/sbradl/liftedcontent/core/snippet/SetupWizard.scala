@@ -13,24 +13,15 @@ class SetupWizard extends Wizard {
   override def nextButton = <button>{S ? "NEXT"}</button>
   override def prevButton = <button>{S ? "PREVIOUS"}</button>
   
-  object setupInformation extends WizardVar(de.sbradl.liftedcontent.core.model.SetupInformation.create)
-  
   object adminUser extends WizardVar(User.create.superUser(true).validated(true))
   object guestUser extends WizardVar(User.create.firstName("Guest"))
 
-  val generalScreen = new Screen {
-    override def screenTop = Full(<h2>{S ? "SITE_INFORMATION"}</h2>)
-    addFields(() => setupInformation)
-  }
-  
   val adminScreen = new Screen {
     override def screenTop = Full(<h2>{S ? "CREATE_ADMIN_USER"}</h2>)
     addFields(() => adminUser)
   }
   
   def finish() {
-    setupInformation.save
-   
     Role.createDefaultRoles
     adminUser.save
     guestUser.save
