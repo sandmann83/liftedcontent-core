@@ -77,6 +77,8 @@ object User extends User with MetaMegaProtoUser[User] {
   def guestUser = User.find(By(User.firstName, "Guest")).open_!
 
   override def beforeSave = addGroupIfNeeded _ :: super.beforeSave
+  
+  override def afterDelete = deleteMemberships _ :: super.afterDelete
 }
 
 /**
@@ -101,6 +103,12 @@ class User extends MegaProtoUser[User] with ManyToMany {
       if (!isMemberOf(Role.memberRoleID)) {
         user.roles += Role.memberRole
       }
+    }
+  }
+  
+  def deleteMemberships(user: User) {
+    UserRoles.findAll(By(UserRoles.user, user)) foreach {
+      _.delete_!
     }
   }
 
