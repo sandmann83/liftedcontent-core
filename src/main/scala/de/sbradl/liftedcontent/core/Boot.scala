@@ -44,6 +44,8 @@ trait Boot {
     new LocaleModule, ExceptionHandler, new ErrorPages, SetupModule,
     new UserModule, new AjaxModule, new PermissionModule,
     new PagesModule, new RichTextEditorModule, ContentRepository, ContentRepositoryHelper)
+    
+  def additionalMenus: List[ConvertableToMenu] = List()
 
   def boot {
     MailConfigurator.init
@@ -60,7 +62,7 @@ trait Boot {
 
       Menu.i("CONTACT") / "contact" >> LocGroup("secondary"),
       //        Menu.i("SITEMAP") / "sitemap" >> LocGroup("secondary"),
-      Menu.i("ERROR") / "error") ::: ModuleManager.menus
+      Menu.i("ERROR") / "error") ::: ModuleManager.menus ::: additionalMenus
 
     def sitemap = new SiteMap(List({
       case r => If(() => ACL.isAllowed(r), RedirectResponse("/user_mgt/login"))
