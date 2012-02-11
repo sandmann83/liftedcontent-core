@@ -8,8 +8,11 @@ import net.liftweb.db.DefaultConnectionIdentifier
 import net.liftweb.mapper.Schemifier
 import net.liftweb.mapper.BaseMetaMapper
 import net.liftweb.http.S
+import net.liftweb.db.DBLogEntry
+import net.liftweb.util.Log
+import net.liftweb.common.Logger
 
-object Database {
+object Database extends Logger {
 
   private var mappers = List[BaseMetaMapper]()
 
@@ -34,6 +37,18 @@ object Database {
 
     // Make a transaction span the whole HTTP request
     S.addAround(DB.buildLoanWrapper)
+
+    if (Props.mode == Props.RunModes.Development) {
+      DB.addLogFunc {
+        case (query, time) => {
+          info("All queries took " + time + "ms: ")
+          query.allEntries.foreach({
+            case DBLogEntry(stmt, duration) =>
+              info(stmt + " took " + duration + "ms")
+          })
+        }
+      }
+    }
   }
 
 }
