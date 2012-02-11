@@ -14,8 +14,10 @@ object CoreBuild extends Build {
       "net.liftweb" %% "lift-util" % liftVersion % "compile->default" withSources,
       "net.liftweb" %% "lift-common" % liftVersion % "compile->default" withSources,
       "net.liftweb" %% "lift-wizard" % liftVersion % "compile->default" withSources,
+      "net.liftweb" %% "lift-widgets" % liftVersion % "compile->default" withSources,
       "eu.sbradl" %% "liftedcontent-util" % "1.0.0" % "compile",
-      "eu.sbradl" %% "liftedcontent-rte" % "1.0.0" % "compile"
+      "eu.sbradl" %% "liftedcontent-rte" % "1.0.0" % "compile",
+      "eu.sbradl" %% "liftedcontent-repository" % "1.0.0" % "compile"
     )
   )
 
