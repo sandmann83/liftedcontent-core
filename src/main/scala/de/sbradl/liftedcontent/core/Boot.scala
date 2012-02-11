@@ -1,40 +1,35 @@
 package de.sbradl.liftedcontent.core
 
+import de.sbradl.liftedcontent.admin.model.BackendArea
+import de.sbradl.liftedcontent.admin.AdminModule
 import de.sbradl.liftedcontent.core.lib.ACL
 import de.sbradl.liftedcontent.core.lib.Database
+import de.sbradl.liftedcontent.core.lib.MailConfigurator
 import de.sbradl.liftedcontent.core.lib.ModuleManager
 import de.sbradl.liftedcontent.core.model.User
+import de.sbradl.liftedcontent.pages.PagesModule
 import de.sbradl.liftedcontent.util.Module
+import net.liftweb.common.Empty
 import net.liftweb.common.Full
 import net.liftweb.http.LiftRulesMocker.toLiftRules
 import net.liftweb.http.Html5Properties
 import net.liftweb.http.LiftRules
 import net.liftweb.http.RedirectResponse
 import net.liftweb.http.Req
+import net.liftweb.http.S
 import net.liftweb.sitemap.LocPath.stringToLocPath
 import net.liftweb.sitemap.Loc.Hidden
 import net.liftweb.sitemap.Loc.If
 import net.liftweb.sitemap.Loc.LocGroup
 import net.liftweb.sitemap.Loc.strToFailMsg
 import net.liftweb.sitemap.ConvertableToMenu
+import net.liftweb.sitemap.Loc
 import net.liftweb.sitemap.Menu
 import net.liftweb.sitemap.SiteMap
 import net.liftweb.util.Vendor.valToVender
-import net.liftweb.util.NamedPF
-import net.liftweb.http.S
-import de.sbradl.liftedcontent.admin.AdminModule
-import de.sbradl.liftedcontent.pages.PagesModule
-import de.sbradl.liftedcontent.admin.model.BackendArea
-import de.sbradl.liftedcontent.rte.RichTextEditorModule
-import net.liftweb.common.Empty
-import de.sbradl.liftedcontent.core.lib.MailConfigurator
 import de.sbradl.liftedcontent.util.UtilModule
-import net.liftweb.sitemap.Loc
-import eu.sbradl.repository.ContentRepository
-import net.liftweb.common.Logger
-import net.liftweb.common.Log4j
-import net.liftweb.util.Props
-import java.net.URL
+import de.sbradl.liftedcontent.rte.RichTextEditorModule
+import eu.sbradl.liftedcontent.repository.ContentRepository
 
 trait Boot {
 
