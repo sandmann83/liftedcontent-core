@@ -41,7 +41,7 @@ trait Boot {
   def modules: List[Module] = List(adminModule, UtilModule, new StartPageModule,
     new LocaleModule, ExceptionHandler, new ErrorPages, SetupModule,
     new UserModule, new AjaxModule, new PermissionModule,
-    new PagesModule, new RichTextEditorModule, ContentRepository)
+    new PagesModule, new RichTextEditorModule, ContentRepository, ContentRepositoryHelper)
 
   def boot {
 

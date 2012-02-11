@@ -26,24 +26,35 @@ class Page(p: PageContent) {
     case _ => p.text
   }
   
-  def onBlur(text: String): JsCmd = {
+  def saveContent(text: String): JsCmd = {
     p.text(text)
+    p.save
+    
+    S.notice(S ? "SAVED_CHANGES")
+  }
+  
+  def saveTitle(title: String): JsCmd = {
+    p.title(title)
     p.save
 
     S.notice(S ? "SAVED_CHANGES")
   }
 
   def render = {
-    val id = nextFuncName
+    val titleId = nextFuncName
+    val contentId = nextFuncName
     
     val enableEditing = User.superUser_?
 
     "data-lift-id=title *" #> p.title &
+    "data-lift-id=title [id]" #> titleId &
+    "data-lift-id=title [contenteditable]" #> enableEditing &
+    "data-lift-id=title [onblur]" #> SHtml.ajaxCall(ElemById(titleId, "innerHTML"), saveTitle _) &
     "data-lift-id=editor" #> (if(enableEditing) PassThru else ClearNodes) &
-      "data-lift-id=content [id]" #> id &
-      "data-lift-id=content [contenteditable]" #> User.superUser_? &
+      "data-lift-id=content [id]" #> contentId &
+      "data-lift-id=content [contenteditable]" #> enableEditing &
       "data-lift-id=content [class+]" #> (if (User.superUser_?) {"editable"} else {""}) &
       "data-lift-id=content *" #> Unparsed(displayContent) &
-      "data-lift-id=content [onblur]" #> SHtml.ajaxCall(ElemById(id, "innerHTML"), onBlur _)
+      "data-lift-id=content [onblur]" #> SHtml.ajaxCall(ElemById(contentId, "innerHTML"), saveContent _)
   }
 }

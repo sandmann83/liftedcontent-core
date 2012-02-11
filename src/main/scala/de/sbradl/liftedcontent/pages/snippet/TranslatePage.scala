@@ -11,12 +11,12 @@ class TranslatePage(page: PageModel) extends LiftScreen {
 
   object content extends ScreenVar(PageContent.create.page(page))
   
-  val title = field(content.title)
   val language = field(content.language)
   val published = field(content.published)
   
   def finish = {
     content.translator(User.currentUser.open_!)
+    content.title(S ? ("TITLE", content.language.isAsLocale))
     page.contents += content
     page.save
     

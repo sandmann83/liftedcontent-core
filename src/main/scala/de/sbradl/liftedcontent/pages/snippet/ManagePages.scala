@@ -8,6 +8,7 @@ import net.liftweb.common.Empty
 import net.liftweb.mapper.By
 import net.liftweb.util.Helpers._
 import net.liftweb.http.S
+import scala.xml.Unparsed
 
 class ManagePages {
 
@@ -25,14 +26,14 @@ class ManagePages {
 
   private def renderPage(page: PageModel): NodeSeq = {
     <li>
-      { page.name } <small>({ S ? "TRANSLATED_INTO" }: { renderLinksToTranslations(page) }, <a href={"/page/translate/" + urlEncode(page.name)}>{ S ? "ADD_TRANSLATION" }</a>)</small>
+      { page.name } <small>({ S ? "TRANSLATED_INTO" }: { Unparsed(renderLinksToTranslations(page).mkString(", ")) }) - <a href={"/page/translate/" + urlEncode(page.name)}>{ S ? "ADD_TRANSLATION" }</a></small>
     </li>
   }
 
   private def renderLinksToTranslations(page: PageModel): NodeSeq = (page.contents map {
     content =>
       {
-        <a href={ content.url }>{ content.language.isAsLocale.getDisplayLanguage(user.locale.isAsLocale) }</a>
+        <a href={ S.contextPath + content.url }>{ content.language.isAsLocale.getDisplayLanguage(user.locale.isAsLocale) }</a>
       }
   })
 
