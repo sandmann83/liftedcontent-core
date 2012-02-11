@@ -31,6 +31,10 @@ import de.sbradl.liftedcontent.core.lib.MailConfigurator
 import de.sbradl.liftedcontent.util.UtilModule
 import net.liftweb.sitemap.Loc
 import eu.sbradl.repository.ContentRepository
+import net.liftweb.common.Logger
+import net.liftweb.common.Log4j
+import net.liftweb.util.Props
+import java.net.URL
 
 trait Boot {
 

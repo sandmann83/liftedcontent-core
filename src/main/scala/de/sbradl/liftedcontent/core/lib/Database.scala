@@ -41,7 +41,7 @@ object Database extends Logger {
     if (Props.mode == Props.RunModes.Development) {
       DB.addLogFunc {
         case (query, time) => {
-          info("All queries took " + time + "ms: ")
+          info("All queries took " + time + "ms")
           query.allEntries.foreach({
             case DBLogEntry(stmt, duration) =>
               info(stmt + " took " + duration + "ms")

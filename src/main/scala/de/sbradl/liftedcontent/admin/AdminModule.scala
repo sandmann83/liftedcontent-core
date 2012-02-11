@@ -36,7 +36,7 @@ class AdminModule extends Module {
     LiftRules.statelessRewrite.prepend(NamedPF("LogLevelChangerRewrite") {
       case RewriteRequest(
         ParsePath("admin" :: "loglevel" :: "change" :: Nil, _, _, _), _, _) =>
-        println("rewriting"); RewriteResponse("loglevel" :: "change" :: Nil)
+        RewriteResponse("loglevel" :: "change" :: Nil)
     })
   }
 
