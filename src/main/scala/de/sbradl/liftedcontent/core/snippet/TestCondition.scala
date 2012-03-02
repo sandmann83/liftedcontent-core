@@ -10,4 +10,9 @@ class TestCondition {
     case false => NodeSeq.Empty
   }
   
+  def notAdmin(in: NodeSeq) = User.superUser_? match {
+    case false => in
+    case true => NodeSeq.Empty
+  }
+  
 }
