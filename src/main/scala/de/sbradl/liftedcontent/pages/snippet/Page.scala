@@ -33,8 +33,6 @@ class Page(p: PageContent) {
 
   def saveContent(value: String): JsCmd = {
     p.text(value)
-    println("Content: " + value)
-
     p.save
 
     S.notice(S ? "SAVED_CHANGES")
@@ -61,6 +59,6 @@ class Page(p: PageContent) {
       "data-lift-id=content [id]" #> contentId &
       "data-lift-id=content [class+]" #> (if (User.superUser_?) { "editable" } else { "" }) &
       "data-lift-id=content *" #> (if (enableEditing) Text(displayContent) else TextileParser.toHtml(displayContent)) &
-      "data-lift-id=content [onblur]" #> SHtml.ajaxCall(ElemById(contentId, "value"), saveContent _)
+      "data-lift-id=save [onclick]" #> SHtml.ajaxCall(ElemById(contentId, "value"), saveContent _)
   }
 }
