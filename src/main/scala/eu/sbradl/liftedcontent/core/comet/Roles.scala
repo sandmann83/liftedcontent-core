@@ -1,15 +1,21 @@
 package eu.sbradl.liftedcontent.core.comet
 
-import net.liftweb.http.CometListener
-import net.liftweb.http.CometActor
+import eu.sbradl.liftedcontent.core.lib.RolesChanged
+import eu.sbradl.liftedcontent.core.lib.RolesServer
 import eu.sbradl.liftedcontent.core.model.Role
-import net.liftweb.util.Helpers._
-import net.liftweb.http.SHtml
-import net.liftweb.http.js.JE.ElemById
-import net.liftweb.http.js.JsCmd
-import net.liftweb.http.js.JsCmds
-import net.liftweb.http.S
 import eu.sbradl.liftedcontent.util.OnConfirm
+
+import net.liftweb.http.js.JE.ElemById
+import net.liftweb.http.js.JsCmd.unitToJsCmd
+import net.liftweb.http.js.JsCmd
+import net.liftweb.http.CometActor
+import net.liftweb.http.CometListener
+import net.liftweb.http.S
+import net.liftweb.http.SHtml
+import net.liftweb.util.Helpers.nextFuncName
+import net.liftweb.util.IterableConst.itNodeSeqFunc
+import net.liftweb.util.StringPromotable.booleanToStrPromo
+import net.liftweb.util.StringPromotable.jsCmdToStrPromo
 
 class Roles extends CometActor with CometListener {
   

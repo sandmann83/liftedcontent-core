@@ -9,7 +9,6 @@ import net.liftweb.util.Props
 import eu.sbradl.liftedcontent.core.ExceptionHandler
 import net.liftweb.util.ClearNodes
 import scala.xml.Text
-import net.liftweb.util.PassThru
 
 class LastError {
 

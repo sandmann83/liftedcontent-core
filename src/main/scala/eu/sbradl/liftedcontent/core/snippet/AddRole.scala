@@ -1,13 +1,14 @@
 package eu.sbradl.liftedcontent.core.snippet
 
-import net.liftweb.http.S
+import eu.sbradl.liftedcontent.core.lib.RolesChanged
+import eu.sbradl.liftedcontent.core.lib.RolesServer
 import eu.sbradl.liftedcontent.core.model.Role
-import eu.sbradl.liftedcontent.core.comet.RolesServer
-import net.liftweb.http.js.JsCmds
-import eu.sbradl.liftedcontent.core.comet.RolesChanged
+
+import net.liftweb.http.js.JsCmd.unitToJsCmd
 import net.liftweb.http.js.JsCmd
-import net.liftweb.util.Helpers._
+import net.liftweb.http.S
 import net.liftweb.http.SHtml
+import net.liftweb.util.Helpers.strToCssBindPromoter
 
 class AddRole {
 

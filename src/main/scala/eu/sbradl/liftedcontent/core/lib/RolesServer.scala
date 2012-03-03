@@ -1,4 +1,4 @@
-package eu.sbradl.liftedcontent.core.comet
+package eu.sbradl.liftedcontent.core.lib
 
 import net.liftweb.actor.LiftActor
 import net.liftweb.http.ListenerManager

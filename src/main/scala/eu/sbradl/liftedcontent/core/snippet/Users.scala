@@ -1,17 +1,14 @@
 package eu.sbradl.liftedcontent.core.snippet
 
-import eu.sbradl.liftedcontent.core.model.User
 import eu.sbradl.liftedcontent.core.model.Role
-
-import scala.xml.NodeSeq
-import net.liftweb.util.Helpers._
-import net.liftweb.common.Empty
-import net.liftweb.common.Full
-import net.liftweb.http._
+import eu.sbradl.liftedcontent.core.model.User
 import net.liftweb.http.js.JsCmd
 import net.liftweb.http.js.JsCmds
+import net.liftweb.http.S
+import net.liftweb.http.SHtml
 import net.liftweb.mapper.By
-import net.liftweb.http.SHtml.BasicElemAttr
+import net.liftweb.util.Helpers.strToCssBindPromoter
+import net.liftweb.util.IterableConst.itNodeSeqFunc
 import scala.xml.Text
 
 class UserRoles {
