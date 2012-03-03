@@ -12,13 +12,11 @@ import de.sbradl.liftedcontent.core.model.{ SetupInformation => SetupInformation
 import net.liftweb.util.ClearNodes
 import net.liftweb.http.S
 import de.sbradl.liftedcontent.util.DatabaseHelpers._
+import scala.xml.Text
 
 class SetupInformation {
 
-  val information = SetupInformationModel.find().openOr(
-    SetupInformationModel.create
-      .title("LiftedContent")
-      .subtitle("Scala/Lift based CMS"))
+  val information = SetupInformationModel.findOrDefault
 
   val enableEditing = User.superUser_?
 

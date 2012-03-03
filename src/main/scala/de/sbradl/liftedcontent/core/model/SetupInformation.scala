@@ -4,6 +4,10 @@ import net.liftweb.http.S
 
 object SetupInformation extends SetupInformation with LongKeyedMetaMapper[SetupInformation] {
   override def fieldOrder = List(title, subtitle)
+
+  def findOrDefault = find().openOr(create
+    .title("LiftedContent")
+    .subtitle("Scala/Lift based CMS"))
 }
 
 class SetupInformation extends LongKeyedMapper[SetupInformation] with IdPK {
@@ -21,5 +25,9 @@ class SetupInformation extends LongKeyedMapper[SetupInformation] with IdPK {
     override def displayName = S ? "WEBSITE_SUBTITLE"
     override def validations = List(
       valMaxLen(128, S ? "NAME_TOO_LONG") _)
+  }
+
+  object language extends MappedString(this, 2) {
+    override def displayName = S ? "WEBSITE_LANGUAGE"
   }
 }
