@@ -9,6 +9,8 @@ import net.liftweb.http.provider.HTTPCookie
 import java.util.Locale
 import de.sbradl.liftedcontent.core.model.User
 import net.liftweb.http.S
+import net.liftweb.http.Req
+import model.SetupInformation
 
 class LocaleModule extends Module {
 
@@ -17,32 +19,36 @@ class LocaleModule extends Module {
   override def resourceNames = List("i18n/core")
 
   override def init {
-    val languageCookie = "liftedcontent.language"
 
     LiftRules.localeCalculator = {
       case fullReq @ Full(req) => {
-        def localeCookie(in: String): HTTPCookie = HTTPCookie(languageCookie, in)
-
-        def localeFromString(in: String): Locale = {
-          val x = in.split("_").toList; new Locale(x.head, x.last)
-        }
-
-        def calcLocale: Locale = User.currentUser match {
-          case Full(user) => user.locale.isAsLocale
-          case _ => LiftRules.defaultLocaleCalculator(fullReq)
-        }
-
         S.param("lang") match {
-          case Full(null) => calcLocale
+          case Full(null) => calcLocale(fullReq)
           case f @ Full(selectedLocale) => {
             S.addCookie(localeCookie(selectedLocale))
             new Locale(selectedLocale)
           }
-          case _ => calcLocale
+          case _ => calcLocale(fullReq)
         }
       }
       case _ => Locale.getDefault
 
+    }
+  }
+
+  private val languageCookie = "liftedcontent.language"
+  private def localeCookie(in: String): HTTPCookie = HTTPCookie(languageCookie, in)
+
+  private def localeFromString(in: String): Locale = {
+    val x = in.split("_").toList
+    new Locale(x.head, x.last)
+  }
+
+  private def calcLocale(req: Box[HTTPRequest]): Locale = SetupInformation.locale match {
+    case Full(locale) => locale
+    case _ => User.currentUser match {
+      case Full(user) => user.locale.isAsLocale
+      case _ => LiftRules.defaultLocaleCalculator(req)
     }
   }
 
