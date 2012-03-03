@@ -1,6 +1,10 @@
 package de.sbradl.liftedcontent.core.model
 import net.liftweb.mapper._
 import net.liftweb.http.S
+import net.liftweb.common.Box
+import java.util.Locale
+import net.liftweb.common.Full
+import net.liftweb.common.Empty
 
 object SetupInformation extends SetupInformation with LongKeyedMetaMapper[SetupInformation] {
   override def fieldOrder = List(title, subtitle)
@@ -8,6 +12,14 @@ object SetupInformation extends SetupInformation with LongKeyedMetaMapper[SetupI
   def findOrDefault = find().openOr(create
     .title("LiftedContent")
     .subtitle("Scala/Lift based CMS"))
+
+  def locale: Box[Locale] = find() match {
+    case Full(information) => information.language.is match {
+      case null => Empty
+      case lang => Full(Locale.forLanguageTag(lang))
+    }
+    case _ => Empty
+  }
 }
 
 class SetupInformation extends LongKeyedMapper[SetupInformation] with IdPK {
