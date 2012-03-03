@@ -13,6 +13,7 @@ import eu.sbradl.liftedcontent.core.model.Role
 import scala.xml.Text
 import net.liftweb.sitemap.SiteMap
 import eu.sbradl.liftedcontent.pages.model.{ Page => PageModel }
+import eu.sbradl.liftedcontent.core.lib.RequestHelpers
 
 class Permissions {
 
@@ -46,11 +47,7 @@ class Permissions {
   def render = {
     val roles = Role.findAll
 
-    val rawUrls = LiftRules.siteMap.openOr(SiteMap()).menus map (menu => menu.loc.link.uriList.mkString("/"))
-    val urls: List[String] = (rawUrls map (url => url.contains("/") match {
-      case true => url
-      case false => "default/" + url
-    })) ++ (PageModel.findAll map (p => p.url))
+    val urls = RequestHelpers.allPaths("default/")
 
     val groupedUrls = (urls.sorted groupBy (
       url => {

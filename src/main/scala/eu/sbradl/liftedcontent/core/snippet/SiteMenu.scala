@@ -7,6 +7,7 @@ import net.liftweb.sitemap.MenuItem
 import scala.xml.NodeSeq
 import scala.xml.Text
 import net.liftweb.common.Full
+import eu.sbradl.liftedcontent.core.lib.RequestHelpers
 
 class SiteMenu {
   val PrimaryMenuGroup = "primary"
@@ -14,7 +15,7 @@ class SiteMenu {
   val UserMenuGroup = "user"
 
   private def markup(menuItem: MenuItem): NodeSeq = {
-    var currentLocation = ("/" + S.request.open_!.path.wholePath.mkString("/"))
+    var currentLocation = ("/" + RequestHelpers.currentPath.open_!)
     
     currentLocation = currentLocation endsWith "/index" match {
       case true => currentLocation.replace("/index", "/")

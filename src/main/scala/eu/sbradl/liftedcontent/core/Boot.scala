@@ -37,7 +37,7 @@ trait Boot {
 
   def modules: List[Module] = List(adminModule, UtilModule, new StartPageModule,
     new LocaleModule, ExceptionHandler, new ErrorPages, SetupModule,
-    new UserModule, new AjaxModule, new PermissionModule,
+    new UserModule, new AjaxModule, new PermissionModule, new MetaTagModule,
     new PagesModule, new RichTextEditorModule, ContentRepository, ContentRepositoryHelper)
     
   def additionalMenus: List[ConvertableToMenu] = List()

@@ -26,7 +26,7 @@ object ACL extends Logger {
     case Full(Req("user_mgt" :: "reset_password" :: _, _, _)) => true
     case Full(Req("setup" :: _, _, _)) => true
     case Full(Req("error" :: _, _, _)) => true
-    case Full(request) => request.path.wholePath.mkString("/") match {
+    case Full(request) => RequestHelpers.path(request) match {
       case "404.html" => true
       case location => isAllowed(location)
     }
