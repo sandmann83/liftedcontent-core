@@ -3,10 +3,10 @@ package eu.sbradl.liftedcontent.core.model
 import org.specs2.mutable._
 import org.specs2.runner.JUnitRunner
 import org.junit.runner.RunWith
-import de.sbradl.liftedcontent.util.InMemoryTestDatabase
-import de.sbradl.liftedcontent.core.model.User
-import de.sbradl.liftedcontent.core.model.UserRoles
-import de.sbradl.liftedcontent.core.model.Role
+import eu.sbradl.liftedcontent.util.InMemoryTestDatabase
+import eu.sbradl.liftedcontent.core.model.User
+import eu.sbradl.liftedcontent.core.model.UserRoles
+import eu.sbradl.liftedcontent.core.model.Role
 import net.liftweb.mapper.By
 import net.liftweb.common.Full
 
