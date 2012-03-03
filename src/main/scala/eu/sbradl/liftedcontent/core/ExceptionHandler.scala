@@ -11,8 +11,6 @@ import net.liftweb.common.Loggable
 import eu.sbradl.liftedcontent.util.Module
 
 object ExceptionHandler extends Module with Logger {
-  
-  def name = "ExceptionHandler"
 
   object lastError extends SessionVar[Box[Throwable]](Empty)
 

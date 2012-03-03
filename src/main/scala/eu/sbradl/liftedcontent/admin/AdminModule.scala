@@ -27,8 +27,6 @@ class AdminModule extends Module {
     override def menuLocParams: List[Loc.AnyLocParam] = List(User.testSuperUser, Hidden)
   }
 
-  val name = "Admin"
-
   def menuTest = User.superUser_?
 
   override def init {

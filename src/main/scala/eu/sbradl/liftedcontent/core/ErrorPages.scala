@@ -10,8 +10,6 @@ import eu.sbradl.liftedcontent.util.Module
  * Set error pages.
  */
 class ErrorPages extends Module {
-
-  def name = "ErrorPages"
   
   override def init {
     LiftRules.uriNotFound.prepend(NamedPF("404 Handler") {

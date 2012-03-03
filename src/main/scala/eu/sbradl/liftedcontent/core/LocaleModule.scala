@@ -14,8 +14,6 @@ import model.SetupInformation
 
 class LocaleModule extends Module {
 
-  def name = "Locale"
-
   override def resourceNames = List("i18n/core")
 
   override def init {

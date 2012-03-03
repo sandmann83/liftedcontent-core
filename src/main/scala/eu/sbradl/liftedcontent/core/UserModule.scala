@@ -5,7 +5,7 @@ import eu.sbradl.liftedcontent.core.model.User
 
 class UserModule extends Module {
   
-  def name = "Users"
+  override def name = "Users"
 
   override def mappers = List(User)
   

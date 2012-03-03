@@ -7,7 +7,7 @@ import net.liftweb.http.LiftScreen
 import net.liftweb.http.S
 import net.liftweb.sitemap.SiteMap
 import eu.sbradl.liftedcontent.core.model.{ SetupInformation => SetupInformationModel }
-import eu.sbradl.liftedcontent.core.lib.LocaleHelpers
+import eu.sbradl.liftedcontent.util.LocaleHelpers
 
 class GeneralSettings extends LiftScreen {
 

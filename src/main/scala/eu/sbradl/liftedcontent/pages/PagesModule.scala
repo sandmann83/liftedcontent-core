@@ -17,8 +17,6 @@ import net.liftweb.util.Helpers.urlDecode
 
 class PagesModule extends Module {
 
-  def name = "Pages"
-
   override def mappers = List(Page, PageContent)
 
   override def menus = List(

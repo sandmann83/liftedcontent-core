@@ -15,7 +15,7 @@ import eu.sbradl.liftedcontent.admin.model.BackendArea
 
 class PermissionModule extends Module {
   
-  def name = "Permissions"
+  override def name = "Permissions"
 
   override def mappers = List(Role, ACLEntry, UserRoles)
 

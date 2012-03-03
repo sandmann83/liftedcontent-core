@@ -11,8 +11,6 @@ import eu.sbradl.liftedcontent.core.model.StartPage
 import lib.UserAgentDetector
 
 class StartPageModule extends Module {
-  
-  def name = "StartPage"
 
   override def mappers = List(StartPage)
 

@@ -6,8 +6,6 @@ import net.liftweb.http.LiftRulesMocker.toLiftRules
 import net.liftweb.http.LiftRules
 
 class AjaxModule extends Module {
-  
-  def name = "Ajax"
 
   override def init {
     LiftRules.ajaxStart =

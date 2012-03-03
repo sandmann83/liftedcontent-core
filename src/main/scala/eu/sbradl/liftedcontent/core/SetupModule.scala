@@ -15,8 +15,6 @@ import eu.sbradl.liftedcontent.core.model.User
 
 object SetupModule extends Module {
   
-  def name = "Setup"
-  
   def isAlreadyInstalled = User.count > 0
   
   override def mappers = List(SetupInformation)
