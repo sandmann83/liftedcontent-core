@@ -4,9 +4,6 @@ import org.specs2.mutable._
 import org.specs2.runner.JUnitRunner
 import org.junit.runner.RunWith
 import eu.sbradl.liftedcontent.util.InMemoryTestDatabase
-import eu.sbradl.liftedcontent.core.model.User
-import eu.sbradl.liftedcontent.core.model.UserRoles
-import eu.sbradl.liftedcontent.core.model.Role
 import net.liftweb.mapper.By
 import net.liftweb.common.Full
 
