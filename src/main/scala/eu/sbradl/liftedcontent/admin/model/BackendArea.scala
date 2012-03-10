@@ -55,22 +55,22 @@ class BackendArea extends LongKeyedMapper[BackendArea] with IdPK {
   object name extends MappedString(this, 64) {
     override def displayName = S ? "NAME"
     override def validations = List(
-      valMinLen(3, S ?? "NAME_TOO_SHORT") _,
-      valMaxLen(64, S ?? "NAME_TOO_LONG") _)
+      valMinLen(3, S ? "NAME_TOO_SHORT") _,
+      valMaxLen(64, S ? "NAME_TOO_LONG") _)
   }
 
   object image extends MappedString(this, 128) {
     override def displayName = S ? "IMAGE_NAME"
     override def validations = List(
-      valMinLen(1, S ?? "NAME_TOO_SHORT") _,
-      valMaxLen(128, S ?? "NAME_TOO_LONG") _)
+      valMinLen(1, S ? "NAME_TOO_SHORT") _,
+      valMaxLen(128, S ? "NAME_TOO_LONG") _)
   }
 
   object url extends MappedString(this, 128) {
     override def displayName = S ? "URL"
     override def validations = List(
-      valMinLen(1, S ?? "NAME_TOO_SHORT") _,
-      valMaxLen(128, S ?? "NAME_TOO_LONG") _)
+      valMinLen(1, S ? "NAME_TOO_SHORT") _,
+      valMaxLen(128, S ? "NAME_TOO_LONG") _)
   }
 
   object description extends MappedTextarea(this, 512) {

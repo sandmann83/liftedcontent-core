@@ -22,7 +22,7 @@ object ExceptionHandler extends Module with Logger {
     error(exception.getMessage())
     error(exception.getStackTraceString)
 
-    lastError.set(Full(exception))
+    lastError(Full(exception))
   }
 
   private def initExceptionHandler = {

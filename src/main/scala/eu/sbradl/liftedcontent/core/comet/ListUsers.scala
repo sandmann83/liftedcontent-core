@@ -1,22 +1,22 @@
 package eu.sbradl.liftedcontent.core.comet
 
+import eu.sbradl.liftedcontent.core.lib.UserManagementHelpers.activateOrDeactivateUser
+import eu.sbradl.liftedcontent.core.lib.UserManagementHelpers.canDelete
+import eu.sbradl.liftedcontent.core.lib.UserManagementHelpers.deleteUser
 import eu.sbradl.liftedcontent.core.lib.UserAddedOrDeleted
 import eu.sbradl.liftedcontent.core.lib.UserServer
 import eu.sbradl.liftedcontent.core.model.User
 import eu.sbradl.liftedcontent.util.OnConfirm
-import net.liftweb.http.js.JsCmd.unitToJsCmd
-import net.liftweb.http.js.JsCmd
-import net.liftweb.http.js.JsCmds
+
 import net.liftweb.http.CometActor
 import net.liftweb.http.CometListener
 import net.liftweb.http.S
 import net.liftweb.http.SHtml
 import net.liftweb.mapper.MappedField.mapToType
-import net.liftweb.mapper.By
 import net.liftweb.util.IterableConst.itNodeSeqFunc
 import net.liftweb.util.StringPromotable.jsCmdToStrPromo
-import net.liftweb.util.PassThru
 import net.liftweb.util.ClearNodes
+import net.liftweb.util.PassThru
 
 class ListUsers extends CometActor with CometListener {
   
@@ -41,27 +41,8 @@ class ListUsers extends CometActor with CometListener {
     }
   }
   
-  private def canDelete(user: User): Boolean = {
-    if (User.currentUser.open_!.id.is == user.id.is) false
-    else if(user.id.is == User.guestUser.id.is) false
-    else true
-  }
-  
   override def lowPriority = {
     case UserAddedOrDeleted => reRender
   }
   
-  private def activateOrDeactivateUser(id: Long, status: Boolean): JsCmd = {
-    val user = User.find(By(User.id, id)).openOr(return )
-    user.validated(status)
-    user.save
-
-    JsCmds.Noop
-  }
-  
-  private def deleteUser(user: User): JsCmd = {
-    user.delete_!
-    
-    UserServer ! UserAddedOrDeleted
-  }
 }
