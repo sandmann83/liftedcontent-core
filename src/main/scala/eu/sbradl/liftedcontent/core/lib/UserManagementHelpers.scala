@@ -6,6 +6,7 @@ import net.liftweb.common.Empty
 import net.liftweb.http.js.JsCmd
 import net.liftweb.mapper.By
 import net.liftweb.http.js.JsCmds
+import net.liftweb.http.S
 
 object UserManagementHelpers {
 
@@ -27,6 +28,8 @@ object UserManagementHelpers {
     user.delete_!
     
     UserServer ! UserAddedOrDeleted
+    
+    S.notice(S ? "USER_DELETED")
   }
   
   def activateOrDeactivateUser(id: Long, status: Boolean): JsCmd = {

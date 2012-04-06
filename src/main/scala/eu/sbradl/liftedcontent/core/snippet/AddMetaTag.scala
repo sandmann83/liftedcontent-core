@@ -18,6 +18,8 @@ class AddMetaTag extends LiftScreen {
     metaTag.url(url)
     metaTag.name(name)
     metaTag.save
+    
+    S.notice(S ? "SAVED_CHANGES")
   }
   
 }
