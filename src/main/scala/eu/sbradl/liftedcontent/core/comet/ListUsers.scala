@@ -30,7 +30,7 @@ class ListUsers extends CometActor with CometListener {
           "data-lift-id=email *" #> user.email.is &
             "data-lift-id=firstname *" #> user.firstName &
             "data-lift-id=lastname *" #> user.lastName &
-            "data-lift-id=status *" #> SHtml.ajaxCheckbox(user.validated, (value) => activateOrDeactivateUser(user.id.is, value)) &
+            "data-lift-id=status *" #> SHtml.ajaxCheckbox(user.validated.is, (value) => activateOrDeactivateUser(user.id.is, value)) &
             "data-lift-id=roles [href]" #> ("/admin/users/manage-roles/" + user.id.is) &
             "data-lift-id=roles [title]" #> (S ? "MANAGE_ROLES") &
             "data-lift-id=delete" #> DisplayIf(canDelete(user)) &

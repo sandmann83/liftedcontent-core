@@ -39,7 +39,7 @@ class Page extends LongKeyedMapper[Page] with IdPK with OneToMany[Long, Page] {
   }
   
   def url = "page/" + encodedName
-  def encodedName = urlEncode(name)
+  def encodedName = urlEncode(name.is)
 
   object author extends MappedLongForeignKey(this, User)
   object contents extends MappedOneToMany(PageContent, PageContent.page) with Cascade[PageContent]

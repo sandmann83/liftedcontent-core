@@ -29,7 +29,7 @@ class ManagePages {
 
   private def renderPage(page: PageModel): NodeSeq = {
     <li>
-      { page.name }<small>{ translatedInto(page) } - <a href={ "/page/translate/" + urlEncode(page.name) }>{ S ? "ADD_TRANSLATION" }</a></small>
+      { page.name }<small>{ translatedInto(page) } - <a href={ "/page/translate/" + urlEncode(page.name.is) }>{ S ? "ADD_TRANSLATION" }</a></small>
     </li>
   }
 

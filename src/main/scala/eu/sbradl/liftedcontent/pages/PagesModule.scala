@@ -20,9 +20,9 @@ class PagesModule extends Module {
   override def mappers = List(Page, PageContent)
 
   override def menus = List(
-      Menu.param[PageContent]("PAGE", new Loc.LinkText(p => Text(p.title)), url => PageContent.find(By(PageContent.title, urlDecode(url))), p => p.encodedTitle) / "page",
+      Menu.param[PageContent]("PAGE", new Loc.LinkText(p => Text(p.title.is)), url => PageContent.find(By(PageContent.title, urlDecode(url))), p => p.encodedTitle) / "page",
       Menu.i("ADD_PAGE") / "admin" / "add-page" >> Hidden,
-      Menu.param[Page]("TRANSLATE_PAGE", new Loc.LinkText(p => Text(p.name)), 
+      Menu.param[Page]("TRANSLATE_PAGE", new Loc.LinkText(p => Text(p.name.is)), 
           name => Page.find(By(Page.name, urlDecode(name))), p => p.encodedName) / "page" / "translate")
 
   override def init {

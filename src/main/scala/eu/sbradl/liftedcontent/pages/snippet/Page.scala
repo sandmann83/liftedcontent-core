@@ -23,7 +23,7 @@ class Page(p: PageContent) {
   private def displayContent: String = p.text.is match {
     case null => S ? ("CLICK_TO_EDIT", p.language.isAsLocale)
     case "" => S ? ("CLICK_TO_EDIT", p.language.isAsLocale)
-    case _ => p.text
+    case _ => p.text.is
   }
 
   def saveContent(value: String): JsCmd = {

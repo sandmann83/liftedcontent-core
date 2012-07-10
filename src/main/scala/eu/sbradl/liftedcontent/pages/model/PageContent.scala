@@ -33,7 +33,7 @@ class PageContent extends LongKeyedMapper[PageContent] with IdPK with CreatedUpd
   }
   
   def url = "/page/" + encodedTitle
-  def encodedTitle = urlEncode(title)
+  def encodedTitle = urlEncode(title.is)
   
   object text extends MappedText(this)
 

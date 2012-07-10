@@ -11,7 +11,7 @@ class PagesMenu {
                PageModel.findAllByCurrentLocale map {
                  p =>
                    {
-                     <li><a href={"/page/" + urlEncode(p.title)}>{p.title}</a></li>
+                     <li><a href={"/page/" + urlEncode(p.title.is)}>{p.title}</a></li>
                    }
                }
              }

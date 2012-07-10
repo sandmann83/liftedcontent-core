@@ -9,7 +9,6 @@ import net.liftweb.mapper.Schemifier
 import net.liftweb.mapper.BaseMetaMapper
 import net.liftweb.http.S
 import net.liftweb.db.DBLogEntry
-import net.liftweb.util.Log
 import net.liftweb.common.Logger
 
 object Database extends Logger {

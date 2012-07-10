@@ -8,10 +8,10 @@ import eu.sbradl.liftedcontent.core.lib.RequestHelpers
 class MetaTags {
 
   def render = {
-    "*" #> RequestHelpers.currentPath
-//    SiteMetaDataHelpers.metadata.map {
-//      metadata => <meta name={metadata.name.is} content={metadata.content.is} />
-//    }
+    "*" #>
+    SiteMetaDataHelpers.metadata.map {
+      metadata => <meta name={metadata.name.is} content={metadata.content.is} />
+    }
   }
   
 }

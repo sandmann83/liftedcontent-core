@@ -16,11 +16,11 @@ class ListBackendAreas {
     "data-lift-id=area" #> areas.map {
       area =>
         {
-          "data-lift-id=url [href]" #> ("/admin/" + area.url) &
-          "data-lift-id=url [title]" #> (S ? area.description) &
-          "data-lift-id=name *" #> (S ? area.name) &
-            "data-lift-id=icon [src]" #> ("/images/backend/" + area.image) &
-            "data-lift-id=description *" #> (S ? area.description)
+          "data-lift-id=url [href]" #> ("/admin/" + area.url.is) &
+          "data-lift-id=url [title]" #> (S ? area.description.is) &
+          "data-lift-id=name *" #> (S ? area.name.is) &
+            "data-lift-id=icon [src]" #> ("/images/backend/" + area.image.is) &
+            "data-lift-id=description *" #> (S ? area.description.is)
         }
     }
   }

@@ -27,6 +27,7 @@ import net.liftweb.sitemap.Loc
 import net.liftweb.sitemap.Menu
 import net.liftweb.sitemap.SiteMap
 import net.liftweb.util.Vendor.valToVender
+import net.liftmodules._
 import eu.sbradl.liftedcontent.util.UtilModule
 import eu.sbradl.liftedcontent.rte.RichTextEditorModule
 import eu.sbradl.liftedcontent.repository.ContentRepository
@@ -44,6 +45,7 @@ trait Boot {
 
   def boot {
     MailConfigurator.init
+    JQueryModule.init
     registerModules
     initModules
 
@@ -68,8 +70,6 @@ trait Boot {
     LiftRules.setSiteMapFunc(() => sitemapMutators(sitemap))
 
     LiftRules.htmlProperties.default.set((r: Req) => new Html5Properties(r.userAgent))
-
-    LiftRules.jsArtifacts = net.liftweb.http.js.jquery.JQuery14Artifacts
 
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
 
