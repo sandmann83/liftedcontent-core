@@ -11,7 +11,6 @@ import net.liftweb.http.js.JsCmd.unitToJsCmd
 import net.liftweb.http.js.JsCmd
 import net.liftweb.http.S
 import net.liftweb.http.SHtml
-import net.liftweb.mapper.MappedField.mapToType
 import net.liftweb.textile.TextileParser
 import net.liftweb.util.Helpers.nextFuncName
 import net.liftweb.util.Helpers.strToCssBindPromoter
@@ -41,19 +40,7 @@ class Page(p: PageContent) {
   }
 
   def render = {
-    val titleId = nextFuncName
-    val contentId = nextFuncName
-
-    val enableEditing = User.superUser_?
-
     "data-lift-id=title *" #> p.title &
-      "data-lift-id=title [id]" #> titleId &
-      "data-lift-id=title [contenteditable]" #> enableEditing &
-      "data-lift-id=title [onblur]" #> SHtml.ajaxCall(ElemById(titleId, "innerHTML"), saveTitle _) &
-      "data-lift-id=editor" #> DisplayIf((enableEditing)) &
-      "data-lift-id=content [id]" #> contentId &
-      "data-lift-id=content [class+]" #> (if (User.superUser_?) { "editable" } else { "" }) &
-      "data-lift-id=content *" #> (if (enableEditing) Text(displayContent) else TextileParser.toHtml(displayContent)) &
-      "data-lift-id=save [onclick]" #> SHtml.ajaxCall(ElemById(contentId, "value"), saveContent _)
+      "#page-content-1 *" #> displayContent
   }
 }
