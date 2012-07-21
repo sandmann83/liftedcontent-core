@@ -44,7 +44,7 @@ class Page extends LongKeyedMapper[Page] with IdPK with OneToMany[Long, Page] {
   object author extends MappedLongForeignKey(this, User)
   object contents extends MappedOneToMany(PageContent, PageContent.page) with Cascade[PageContent]
   object template extends MappedString(this, 32) {
-    override def defaultValue = "default"
+    override def defaultValue = "page-default"
   }
   
 }

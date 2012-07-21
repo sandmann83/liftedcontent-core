@@ -17,10 +17,11 @@ import eu.sbradl.liftedcontent.pages.lib.PageServices
 import eu.sbradl.liftedcontent.core.model.User
 import net.liftweb.http.Req
 import net.liftweb.util.Helpers._ 
+import eu.sbradl.liftedcontent.pages.model.PageRegion
 
 class PagesModule extends Module {
 
-  override def mappers = List(Page, PageContent)
+  override def mappers = List(Page, PageContent, PageRegion)
 
   override def menus = List(
     Menu.param[PageContent]("PAGE", new Loc.LinkText(p => Text(p.title.is)), url => PageContent.find(By(PageContent.title, urlDecode(url))), p => p.encodedTitle) / "page",
