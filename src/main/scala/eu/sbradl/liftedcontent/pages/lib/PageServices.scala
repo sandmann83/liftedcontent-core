@@ -11,41 +11,44 @@ import eu.sbradl.liftedcontent.pages.model.PageRegion
 object PageServices extends RestHelper {
 
   serve {
-    case "save" :: _ JsonPut json -> _ => {
-      val regions = json \ "content" children
+    case "save" :: _ JsonPut json -> _ => save(json)
+  }
 
-      val head = extractData(regions.head)
+  private def save(input: JValue) = {
+    val regions = input \ "content" children
 
-      val id = head._1
-      val title = head._2
+    val head = extractData(regions.head)
 
-      PageContent.find(id) match {
-        case Full(page) => {
-          page.title(title)
+    val id = head._1
+    val title = head._2
 
-          regions.tail foreach {
-            r =>
-              {
-                val (key, value) = extractData(r)
-                
-                page.regions.find(_.name.is == key) match {
-                  case Some(region) => region.text(value)
-                  case _ => {
-                    val region = PageRegion.create.belongsTo(page).name(key).text(value)
-                    region.save
-                    page.regions += region
-                  }
+    PageContent.find(id) match {
+      case Full(page) => {
+        page.title(title)
+
+        regions.tail foreach {
+          r =>
+            {
+              val (key, value) = extractData(r)
+
+              page.regions.find(_.name.is == key) match {
+                case Some(region) => region.text(value)
+                case _ => {
+                  val region = PageRegion.create.belongsTo(page).name(key).text(value)
+                  region.save
+                  page.regions += region
                 }
               }
-          }
-          
-          page.save
-
-          new OkResponse
+            }
         }
-        case _ => PlainTextResponse("invalid page id", 500)
-      }
 
+        page.save
+
+        S.notice("SAVED_CHANGES")
+
+        new OkResponse
+      }
+      case _ => PlainTextResponse("invalid page id", 500)
     }
   }
 
