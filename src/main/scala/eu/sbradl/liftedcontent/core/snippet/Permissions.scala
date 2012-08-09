@@ -78,6 +78,8 @@ class Permissions {
                              <tr>
                                <td>{ url }</td>
                                {
+                                 val finalUrl = url replace ("default/", "")
+                                 
                                  roles map (
                                    role => {
                                      val isAdminRole = role.id.is == Role.adminRoleID
@@ -85,7 +87,7 @@ class Permissions {
                                      if (isAdminRole || alwaysAllowed.contains(url)) {
                                        <td><img src="/images/allowed.png" alt="ALLOWED"/></td>
                                      } else {
-                                       val isAllowed = ACLEntry.count(By(ACLEntry.url, url), By(ACLEntry.role, role.id.is)) == 1 || isAdminRole
+                                       val isAllowed = ACLEntry.count(By(ACLEntry.url, finalUrl), By(ACLEntry.role, role.id.is)) == 1 || isAdminRole
                                        <td>{ SHtml.ajaxCheckbox(isAllowed, (value) => onPermissionChanged(url, role.id.is, value)) }</td>
                                      }
                                    })
