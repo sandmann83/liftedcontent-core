@@ -7,7 +7,7 @@ import eu.sbradl.liftedcontent.core.lib.SiteMetaDataHelpers
 class ManageMetaTags {
 
   def render = {
-    "data-lift-id=url *" #> RequestHelpers.allPaths.map {
+    "data-lift-id=url *" #> RequestHelpers.allPaths(withAdditionalPaths = true).map {
       url => {
         "data-lift-id=title *" #> url &
         "data-lift-id=tags *" #> SiteMetaDataHelpers.metadataFor(url).map {

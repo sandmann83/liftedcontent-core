@@ -22,7 +22,7 @@ class CreatePage {
       
       page.name(name)
       page.template(template)
-      page.author(User.currentUser.open_!)
+      page.author(User.currentUser) // TODO: does Box work here?
 
       save(page)
 
