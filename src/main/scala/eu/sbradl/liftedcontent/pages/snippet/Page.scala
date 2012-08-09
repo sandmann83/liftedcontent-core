@@ -9,7 +9,6 @@ import net.liftweb.http.js.JsCmd.unitToJsCmd
 import net.liftweb.http.js.JsCmd
 import net.liftweb.http.S
 import net.liftweb.http.SHtml
-import net.liftweb.textile.TextileParser
 import net.liftweb.util.Helpers.nextFuncName
 import net.liftweb.util.Helpers.strToCssBindPromoter
 import net.liftweb.util.StringPromotable.booleanToStrPromo

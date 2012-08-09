@@ -45,7 +45,6 @@ trait Boot {
 
   def boot {
     MailConfigurator.init
-    JQueryModule.init
     registerModules
     initModules
 
@@ -76,6 +75,9 @@ trait Boot {
     LiftRules.loggedInTest = Full(() => User.loggedIn_?)
 
     LiftRules.fixCSS("css" :: "default" :: Nil, Empty)
+    
+    JQueryModule.InitParam.JQuery=JQueryModule.JQuery172
+    JQueryModule.init()
 
   }
 

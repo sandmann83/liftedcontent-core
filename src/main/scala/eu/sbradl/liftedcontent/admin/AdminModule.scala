@@ -18,8 +18,8 @@ import net.liftweb.sitemap.Loc.strToFailMsg
 import net.liftweb.sitemap.Loc
 import net.liftweb.sitemap.Menu
 import net.liftweb.util.NamedPF
-import net.liftweb.widgets.logchanger.Log4jLoggingBackend
-import net.liftweb.widgets.logchanger.LogLevelChanger
+import net.liftmodules.widgets.logchanger.Log4jLoggingBackend
+import net.liftmodules.widgets.logchanger.LogLevelChanger
 
 class AdminModule extends Module {
 
