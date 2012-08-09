@@ -11,6 +11,8 @@ import eu.sbradl.liftedcontent.core.model.User
 import net.liftweb.http.S
 import net.liftweb.http.Req
 import model.SetupInformation
+import net.liftweb.http.SessionVar
+import net.liftweb.util.Helpers
 
 class LocaleModule extends Module {
 
@@ -18,36 +20,31 @@ class LocaleModule extends Module {
 
   override def init {
 
-    LiftRules.localeCalculator = {
-      case fullReq @ Full(req) => {
-        S.param("lang") match {
-          case Full(null) => calcLocale(fullReq)
-          case f @ Full(selectedLocale) => {
-            S.addCookie(localeCookie(selectedLocale))
-            new Locale(selectedLocale)
-          }
-          case _ => calcLocale(fullReq)
-        }
+    LiftRules.localeCalculator = localeCalculator
+  }
+
+  private def localeCalculator(request: Box[HTTPRequest]): Locale = {
+
+    object sessionLanguage extends SessionVar[Locale](LiftRules.defaultLocaleCalculator(request))
+
+    request.flatMap(r => {
+      def localeFromString(in: String): Locale = {
+        val x = in.split("_").toList;
+        sessionLanguage(new Locale(x.head, x.last))
+        sessionLanguage.is
       }
-      case _ => Locale.getDefault
 
-    }
-  }
+      def calcLocale: Box[Locale] = User.currentUser match {
+        case Full(user) => Full(user.locale.isAsLocale)
+        case _ => Full(sessionLanguage.is)
+      }
 
-  private val languageCookie = "liftedcontent.language"
-  private def localeCookie(in: String): HTTPCookie = HTTPCookie(languageCookie, in)
-
-  private def localeFromString(in: String): Locale = {
-    val x = in.split("_").toList
-    new Locale(x.head, x.last)
-  }
-
-  private def calcLocale(req: Box[HTTPRequest]): Locale = SetupInformation.locale match {
-    case Full(locale) => locale
-    case _ => User.currentUser match {
-      case Full(user) => user.locale.isAsLocale
-      case _ => LiftRules.defaultLocaleCalculator(req)
-    }
+      S.param("locale") match {
+        case Full(null) => calcLocale
+        case Full(selectedLocale) => Helpers.tryo(localeFromString(selectedLocale))
+        case _ => calcLocale
+      }
+    }).openOr(sessionLanguage.is)
   }
 
 }
