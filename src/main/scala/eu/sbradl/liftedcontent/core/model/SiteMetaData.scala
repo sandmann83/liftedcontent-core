@@ -13,7 +13,7 @@ class SiteMetaData extends LongKeyedMapper[SiteMetaData] with IdPK {
     override def displayName = S ? "URL"
   }
 
-  object name extends MappedString(this, 16)
+  object name extends MappedString(this, 25)
 
   object content extends MappedText(this) {
     override def displayName = S ? "CONTENT"

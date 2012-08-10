@@ -15,9 +15,9 @@ import net.liftweb.http.js.jquery.JqWiringSupport
 import net.liftweb.common.Empty
 
 class AddMetaTag {
-
+// TODO: sitemetadata when url = "" -> same as index
   val allUrls = RequestHelpers.allPaths(withAdditionalPaths = true)
-  val allNames = List("application-name", "author", "description", "generator", "keywords")
+  val allNames = List("application-name", "author", "description", "generator", "keywords", "google-site-verification")
 
   private val selectedUrl = ValueCell[Int](0)
   private val selectedName = ValueCell[String]("keywords")
