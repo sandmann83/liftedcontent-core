@@ -3,7 +3,6 @@ package eu.sbradl.liftedcontent.admin
 import eu.sbradl.liftedcontent.admin.model.BackendArea
 import eu.sbradl.liftedcontent.core.model.User
 import eu.sbradl.liftedcontent.util.Module
-
 import net.liftweb.http.LiftRulesMocker.toLiftRules
 import net.liftweb.http.LiftRules
 import net.liftweb.http.ParsePath
@@ -18,12 +17,12 @@ import net.liftweb.sitemap.Loc.strToFailMsg
 import net.liftweb.sitemap.Loc
 import net.liftweb.sitemap.Menu
 import net.liftweb.util.NamedPF
-import net.liftweb.widgets.logchanger.Log4jLoggingBackend
-import net.liftweb.widgets.logchanger.LogLevelChanger
+import net.liftmodules.widgets.logchanger.LogLevelChanger
+import net.liftmodules.widgets.logchanger.LogbackLoggingBackend
 
 class AdminModule extends Module {
 
-  object logLevel extends LogLevelChanger with Log4jLoggingBackend {
+  object logLevel extends LogLevelChanger with LogbackLoggingBackend {
     override def menuLocParams: List[Loc.AnyLocParam] = List(User.testSuperUser, Hidden)
   }
 

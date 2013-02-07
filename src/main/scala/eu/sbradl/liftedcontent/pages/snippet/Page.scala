@@ -3,20 +3,17 @@ package eu.sbradl.liftedcontent.pages.snippet
 import eu.sbradl.liftedcontent.core.model.User
 import eu.sbradl.liftedcontent.pages.model.PageContent
 import eu.sbradl.liftedcontent.util.DisplayIf
-
 import scala.xml.Text
-
 import net.liftweb.http.js.JE.ElemById
 import net.liftweb.http.js.JsCmd.unitToJsCmd
 import net.liftweb.http.js.JsCmd
 import net.liftweb.http.S
 import net.liftweb.http.SHtml
-import net.liftweb.mapper.MappedField.mapToType
-import net.liftweb.textile.TextileParser
 import net.liftweb.util.Helpers.nextFuncName
 import net.liftweb.util.Helpers.strToCssBindPromoter
 import net.liftweb.util.StringPromotable.booleanToStrPromo
 import net.liftweb.util.StringPromotable.jsCmdToStrPromo
+import net.liftmodules.textile.TextileParser
 
 class Page(p: PageContent) {
 
