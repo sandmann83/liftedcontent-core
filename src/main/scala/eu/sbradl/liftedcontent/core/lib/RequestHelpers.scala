@@ -12,13 +12,13 @@ object RequestHelpers {
   def currentPath = S.request.map(r => path(r))
   
   def allPaths: List[String] = allPaths()
-  def allPaths(prefixForUrlWithoutSlash: String = "") = {
+  def allPaths(prefixForUrlWithoutSlash: String = "", withAdditionalPaths: Boolean = false) = {
     val rawUrls = LiftRules.siteMap.openOr(SiteMap()).menus map (menu => menu.loc.link.uriList.mkString("/"))
     
     val urls: List[String] = (rawUrls map (url => url.contains("/") match {
       case true => url
       case false => prefixForUrlWithoutSlash + url
-    })) ++ (PageModel.findAll map (p => p.url))
+    })) ++ (PageModel.findAll map (p => p.url)) ++ (if(withAdditionalPaths) AdditionalUrls() else (Nil))
     
     urls sorted
   }

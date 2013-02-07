@@ -13,44 +13,60 @@ import net.liftweb.util.Helpers.nextFuncName
 import net.liftweb.util.Helpers.strToCssBindPromoter
 import net.liftweb.util.StringPromotable.booleanToStrPromo
 import net.liftweb.util.StringPromotable.jsCmdToStrPromo
+<<<<<<< HEAD
 import net.liftmodules.textile.TextileParser
+=======
+import net.liftweb.util.Helpers._
+import eu.sbradl.liftedcontent.pages.model.PageRegion
+import net.liftweb.util.CssSel
+import net.liftweb.util.PassThru
+>>>>>>> f84daf9aaa1ea41c12005ae77d44fd8aff0a8eb1
 
 class Page(p: PageContent) {
 
-  private def displayContent: String = p.text.is match {
-    case null => S ? ("CLICK_TO_EDIT", p.language.isAsLocale)
-    case "" => S ? ("CLICK_TO_EDIT", p.language.isAsLocale)
-    case _ => p.text
-  }
+  //  private def displayContent: String = p.text.is match {
+  //    case null => S ? ("CLICK_TO_EDIT", p.language.isAsLocale)
+  //    case "" => S ? ("CLICK_TO_EDIT", p.language.isAsLocale)
+  //    case _ => p.text.is
+  //  }
 
-  def saveContent(value: String): JsCmd = {
-    p.text(value)
-    p.save
+  //  def saveContent(value: String): JsCmd = {
+  //    p.text(value)
+  //    p.save
+  //
+  //    S.notice(S ? "SAVED_CHANGES")
+  //  }
 
-    S.notice(S ? "SAVED_CHANGES")
-  }
-
-  def saveTitle(title: String): JsCmd = {
-    p.title(title)
-    p.save
-
-    S.notice(S ? "SAVED_CHANGES")
-  }
+  //  def saveTitle(title: String): JsCmd = {
+  //    p.title(title)
+  //    p.save
+  //
+  //    S.notice(S ? "SAVED_CHANGES")
+  //  }
 
   def render = {
-    val titleId = nextFuncName
-    val contentId = nextFuncName
+    val selectors = p.regions.all.map {
+      region =>
+        {
+          "#page-content-%s *".format(region.name.is) #> region.text.is
+        }
+    }
 
-    val enableEditing = User.superUser_?
-
-    "data-lift-id=title *" #> p.title &
-      "data-lift-id=title [id]" #> titleId &
-      "data-lift-id=title [contenteditable]" #> enableEditing &
-      "data-lift-id=title [onblur]" #> SHtml.ajaxCall(ElemById(titleId, "innerHTML"), saveTitle _) &
-      "data-lift-id=editor" #> DisplayIf((enableEditing)) &
-      "data-lift-id=content [id]" #> contentId &
-      "data-lift-id=content [class+]" #> (if (User.superUser_?) { "editable" } else { "" }) &
-      "data-lift-id=content *" #> (if (enableEditing) Text(displayContent) else TextileParser.toHtml(displayContent)) &
-      "data-lift-id=save [onclick]" #> SHtml.ajaxCall(ElemById(contentId, "value"), saveContent _)
+    "data-lift-id=page-title [id]" #> p.id.is &
+      "data-lift-id=page-title *" #> p.title.is &
+      createSelector(selectors)
   }
+
+  private def createSelector(selectors: List[CssSel]): CssSel = {
+    def createSelector(selector: CssSel, selectors: List[CssSel]): CssSel = selectors match {
+      case List() => selector
+      case head :: tail => createSelector(selector & head, tail)
+    }
+
+    selectors match {
+      case List() => "data-lift-id=content" #> PassThru
+      case _ => createSelector(selectors.head, selectors.tail)
+    }
+  }
+
 }

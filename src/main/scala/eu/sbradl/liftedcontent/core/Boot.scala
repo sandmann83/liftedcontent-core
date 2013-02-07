@@ -27,6 +27,7 @@ import net.liftweb.sitemap.Loc
 import net.liftweb.sitemap.Menu
 import net.liftweb.sitemap.SiteMap
 import net.liftweb.util.Vendor.valToVender
+import net.liftmodules._
 import eu.sbradl.liftedcontent.util.UtilModule
 import eu.sbradl.liftedcontent.rte.RichTextEditorModule
 import eu.sbradl.liftedcontent.repository.ContentRepository
@@ -69,13 +70,14 @@ trait Boot {
 
     LiftRules.htmlProperties.default.set((r: Req) => new Html5Properties(r.userAgent))
 
-    LiftRules.jsArtifacts = net.liftweb.http.js.jquery.JQuery14Artifacts
-
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
 
     LiftRules.loggedInTest = Full(() => User.loggedIn_?)
 
     LiftRules.fixCSS("css" :: "default" :: Nil, Empty)
+    
+    JQueryModule.InitParam.JQuery=JQueryModule.JQuery172
+    JQueryModule.init()
 
   }
 

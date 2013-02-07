@@ -55,7 +55,7 @@ object User extends User with MetaMegaProtoUser[User] {
   override def lostPasswordXhtml = <article>
                                      <header>
                                        <h1>{ S ? "RECOVER_PASSWORD" }</h1>
-                                       <p>{ S.??("enter.email") }</p>
+                                       <p>{ S.?("enter.email") }</p>
                                      </header>
                                      <form method="post" action={ S.uri }>
                                        <table>

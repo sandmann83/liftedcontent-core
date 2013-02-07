@@ -33,9 +33,9 @@ class PageContent extends LongKeyedMapper[PageContent] with IdPK with CreatedUpd
   }
   
   def url = "/page/" + encodedTitle
-  def encodedTitle = urlEncode(title)
+  def encodedTitle = urlEncode(title.is)
   
-  object text extends MappedText(this)
+  object regions extends MappedOneToMany(PageRegion, PageRegion.belongsTo)
 
   object published extends MappedBoolean(this) {
     override def displayName = S ? "PUBLISH_IMMEDIATELY"
