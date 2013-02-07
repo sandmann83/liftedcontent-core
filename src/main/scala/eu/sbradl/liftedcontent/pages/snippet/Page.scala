@@ -13,14 +13,9 @@ import net.liftweb.util.Helpers.nextFuncName
 import net.liftweb.util.Helpers.strToCssBindPromoter
 import net.liftweb.util.StringPromotable.booleanToStrPromo
 import net.liftweb.util.StringPromotable.jsCmdToStrPromo
-<<<<<<< HEAD
 import net.liftmodules.textile.TextileParser
-=======
-import net.liftweb.util.Helpers._
-import eu.sbradl.liftedcontent.pages.model.PageRegion
 import net.liftweb.util.CssSel
 import net.liftweb.util.PassThru
->>>>>>> f84daf9aaa1ea41c12005ae77d44fd8aff0a8eb1
 
 class Page(p: PageContent) {
 

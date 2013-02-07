@@ -75,9 +75,6 @@ trait Boot {
     LiftRules.loggedInTest = Full(() => User.loggedIn_?)
 
     LiftRules.fixCSS("css" :: "default" :: Nil, Empty)
-    
-    JQueryModule.InitParam.JQuery=JQueryModule.JQuery172
-    JQueryModule.init()
 
   }
 

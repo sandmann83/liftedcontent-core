@@ -12,7 +12,7 @@ trait BaseScreen extends CssBoundLiftScreen {
 
   override def defaultToAjax_? : Boolean = true
 
-  override def allTemplate = defaultAllTemplate
+  //override def allTemplate = defaultAllTemplate
 
   protected override lazy val cssClassBinding = new CssClassBinding {
     override def label = "control-label"
